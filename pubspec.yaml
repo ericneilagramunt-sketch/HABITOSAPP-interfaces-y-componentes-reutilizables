@@ -1,6 +1,6 @@
 name: habitosapp
-description: Aplicación de hábitos diarios con persistencia local en SharedPreferences.
-version: 1.0.0+1
+description: Aplicación de hábitos diarios con base de datos local (SQLite) y shared_preferences.
+version: 2.0.0+1
 publish_to: 'none'
 
 environment:
@@ -9,8 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  shared_preferences: ^2.3.0
-  intl: ^0.19.0
+  # Añadidas con: flutter pub add shared_preferences sqflite path
+  shared_preferences: ^2.3.0 # guarda la sesión (usuario que ha entrado)
+  sqflite: ^2.3.3 # base de datos SQLite local
+  path: ^1.9.0 # para construir la ruta del archivo de la base de datos
 
 dev_dependencies:
   flutter_test:
