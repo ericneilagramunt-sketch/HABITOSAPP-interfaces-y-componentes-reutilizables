@@ -1,17 +1,18 @@
-# habitosapp
+# HábitosApp
+Aplicación Flutter de seguimiento de hábitos (DAM2). Usa SQLite (sqflite) para los datos y SharedPreferences para recordar la sesión.
+## Estructura de lib/
+- `main.dart`: inicio y configuración (un único MaterialApp).
+- `modelos/`: Usuario, Habito, Estadistica, ColoresHabito.
+- `servicios/`: BaseDatos, UsuarioService, HabitoService, EstadisticaService (CRUD) y SesionService.
+- `widgets/`: CampoTextoApp, BotonPrincipal, TarjetaHabito, DatoEstadistica.
+- `pantallas/`: login, registro, hábitos, editar hábito, estadísticas y administración.
 
-A new Flutter project.
+## Acceso
+- Administrador por defecto: usuario `admin`, contraseña `admin123`.
+- Los usuarios nuevos se registran desde la pantalla de registro (rol usuario).
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Ejecutar (Android / iOS; sqflite no funciona en web)
+```
+flutter pub get
+flutter run
+```
