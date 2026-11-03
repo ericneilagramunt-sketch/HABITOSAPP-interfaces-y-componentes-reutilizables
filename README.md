@@ -1,18 +1,20 @@
 # HábitosApp
-Aplicación Flutter de seguimiento de hábitos (DAM2). Usa SQLite (sqflite) para los datos y SharedPreferences para recordar la sesión.
-## Estructura de lib/
-- `main.dart`: inicio y configuración (un único MaterialApp).
-- `modelos/`: Usuario, Habito, Estadistica, ColoresHabito.
-- `servicios/`: BaseDatos, UsuarioService, HabitoService, EstadisticaService (CRUD) y SesionService.
-- `widgets/`: CampoTextoApp, BotonPrincipal, TarjetaHabito, DatoEstadistica.
-- `pantallas/`: login, registro, hábitos, editar hábito, estadísticas y administración.
+
+App Flutter para seguir hábitos (DAM2). Dos prácticas:
+## Práctica 1: Persistencia de datos
+- Guarda usuarios, hábitos y estadísticas en una base de datos SQLite.
+- Recuerda la sesión con SharedPreferences.
+- Los servicios hacen crear, leer, actualizar y eliminar.
+- El usuario solo ve sus hábitos; el administrador ve todo.
+
+## Práctica 2: Interfaces y componentes
+- Cuatro piezas reutilizables: campo de texto, botón, tarjeta de hábito y dato de estadística.
+- Pantallas: login, registro, hábitos, editar hábito, estadísticas y administración.
 
 ## Acceso
-- Administrador por defecto: usuario `admin`, contraseña `admin123`.
-- Los usuarios nuevos se registran desde la pantalla de registro (rol usuario).
+- Administrador: admin/ admin123
+- Usuarios nuevos: desde la pantalla de registro.
 
-## Ejecutar (Android / iOS; sqflite no funciona en web)
-```
+## Ejecutar (Android o iOS, no funciona en web)
 flutter pub get
 flutter run
-```
