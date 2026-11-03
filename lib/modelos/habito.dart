@@ -15,7 +15,7 @@ class Habito {
     List<String>? fechasCompletadas,
   }) : fechasCompletadas = fechasCompletadas ?? [];
 
-  /// Fecha en formato yyyy-MM-dd
+  /// Fecha en formato dia-mes-año
   static String formatearFecha(DateTime f) {
     final mes = f.month.toString().padLeft(2, '0');
     final dia = f.day.toString().padLeft(2, '0');
@@ -51,7 +51,7 @@ class Habito {
     }
     return racha;
   }
-
+  // Convierte el hábito en un mapa para guardarlo en la base de datos
   Map<String, dynamic> toMap() => {
         'id': id,
         'usuario_id': usuarioId,
@@ -59,7 +59,7 @@ class Habito {
         'color': colorHex,
         'fechas_completadas': fechasCompletadas.join(','),
       };
-
+ // Hace lo contrario: crea un hábito a partir de una fila de la base de datos
   factory Habito.fromMap(Map<String, dynamic> m) {
     final texto = m['fechas_completadas'] as String;
     return Habito(
