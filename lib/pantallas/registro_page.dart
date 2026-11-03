@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import '../modelos/usuario.dart';
+import '../servicios/sesion_service.dart';
 import '../servicios/usuario_service.dart';
 import '../widgets/boton_principal.dart';
 import '../widgets/campo_texto_app.dart';
+import 'login_page.dart';
 
 /// Registro de un usuario nuevo (rol "usuario").
 class RegistroPage extends StatefulWidget {
@@ -28,6 +30,19 @@ class _RegistroPageState extends State<RegistroPage> {
     _emailController.dispose();
     _claveController.dispose();
     super.dispose();
+  }
+
+  // Vuelve al login. Si el registro es la primera pantalla (no hay nada
+  // a lo que volver), reemplaza esta pantalla por el login.
+  void _volverAlLogin() {
+    if (Navigator.canPop(context)) {
+      Navigator.pop(context);
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LoginPage()),
+      );
+    }
   }
 
   Future<void> _registrar() async {
@@ -64,11 +79,14 @@ class _RegistroPageState extends State<RegistroPage> {
       rol: Usuario.rolUsuario,
     ));
 
+    // Ya se ha registrado alguien: deja de ser la primera vez
+    await SesionService().marcarPrimeraVezCompletada();
+
     if (!mounted) return;
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Registro correcto. Ya puedes entrar.')),
     );
-    Navigator.pop(context);
+    _volverAlLogin();
   }
 
   @override
@@ -101,7 +119,7 @@ class _RegistroPageState extends State<RegistroPage> {
               ),
             BotonPrincipal(texto: 'Registrarse', alPulsar: _registrar),
             TextButton(
-              onPressed: () => Navigator.pop(context),
+              onPressed: _volverAlLogin,
               child: const Text('Volver al inicio de sesión'),
             ),
           ],
