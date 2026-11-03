@@ -16,5 +16,5 @@ App Flutter para seguir hábitos (DAM2). Dos prácticas:
 - Usuarios nuevos: desde la pantalla de registro.
 
 ## Ejecutar (Android o iOS, no funciona en web)
-flutter pub get
-flutter run
+- flutter pub get
+- flutter run
