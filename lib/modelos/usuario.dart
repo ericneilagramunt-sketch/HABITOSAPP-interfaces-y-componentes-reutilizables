@@ -1,16 +1,17 @@
 /// Modelo de un usuario (tabla usuarios).
 class Usuario {
+   // Los dos roles que existen en la app
   static const String rolAdmin = 'administrador';
   static const String rolUsuario = 'usuario';
 
-  int? id;
-  String usuario;
+  int? id;// puede ser null hasta que se guarda en la base de datos
+  String usuario; // nombre con el que inicia sesión
   String nombre;
   String apellidos;
   String email;
   String contrasena;
-  String fechaCreacion;
-  String rol;
+  String fechaCreacion; // cuándo se creó la cuenta, se pone sola al registrarse
+  String rol; // "administrador" o "usuario"
 
   Usuario({
     this.id,
@@ -22,10 +23,10 @@ class Usuario {
     required this.fechaCreacion,
     required this.rol,
   });
-
+ // Dice si este usuario es administrador (true) o usuario normal (false)
   bool get esAdmin => rol == rolAdmin;
 
-  // Objeto -> Map (para guardar en la base de datos)
+ // Convierte la estadística en un mapa para guardarla en la base de datos
   Map<String, dynamic> toMap() => {
         'id': id,
         'usuario': usuario,
@@ -36,8 +37,7 @@ class Usuario {
         'fecha_creacion': fechaCreacion,
         'rol': rol,
       };
-
-  // Map -> objeto (al leer de la base de datos)
+  // Hace lo contrario: crea una estadística a partir de una fila de la base de datos
   factory Usuario.fromMap(Map<String, dynamic> m) => Usuario(
         id: m['id'] as int,
         usuario: m['usuario'] as String,
