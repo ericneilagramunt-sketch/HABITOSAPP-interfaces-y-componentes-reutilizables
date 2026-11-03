@@ -3,8 +3,10 @@ import '../modelos/estadistica.dart';
 import '../servicios/estadistica_service.dart';
 import '../widgets/confirmar_eliminar.dart';
 import 'estadistica_form_page.dart';
+/// Esta pantalla permite al administrador ver todas las estadísticas.
+/// También puede agregar, editar o eliminar una estadística.
+/// Los cambios se actualizan automáticamente al cargar la lista.
 
-/// El administrador gestiona todas las filas de la tabla estadisticas.
 class AdminEstadisticasPage extends StatefulWidget {
   const AdminEstadisticasPage({super.key});
 
