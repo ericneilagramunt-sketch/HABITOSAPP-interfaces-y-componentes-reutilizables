@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'pantallas/habitos_page.dart';
 import 'pantallas/login_page.dart';
+import 'pantallas/registro_page.dart';
 import 'servicios/sesion_service.dart';
 import 'servicios/usuario_service.dart';
 
@@ -29,17 +30,26 @@ class _HabitosAppState extends State<HabitosApp> {
     _arrancar();
   }
 
-  // Si hay una sesión guardada (SharedPreferences) y el usuario existe en la
-  // base de datos, va directo a sus hábitos. Si no, al inicio de sesión.
+  // 1) Si hay sesión guardada y el usuario existe en la base de datos -> sus hábitos.
+  // 2) Si nunca ha accedido nadie (primera vez) -> Registro.
+  // 3) En cualquier otro caso -> Inicio de sesión.
   Future<void> _arrancar() async {
+    final sesion = SesionService();
     Widget pantalla = const LoginPage();
-    final id = await SesionService().obtenerUsuarioId();
+
+    final id = await sesion.obtenerUsuarioId();
     if (id != null) {
       final usuario = await UsuarioService().obtenerPorId(id);
       if (usuario != null) {
         pantalla = HabitosPage(usuario: usuario);
       }
+    } else {
+      final primeraVez = await sesion.esPrimeraVez();
+      if (primeraVez) {
+        pantalla = const RegistroPage();
+      }
     }
+
     if (!mounted) return;
     setState(() => _inicio = pantalla);
   }
